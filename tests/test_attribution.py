@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 from pathlib import Path
 from evalpipe.spec import TaskSpec
 from evalpipe.sandbox import EnvReport, TestReport

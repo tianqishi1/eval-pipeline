@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """CI 回归门禁：对比基线。通过率下降/模型类回归/新增题坏 → 阻断；探针任务豁免（其失败是设计目的）。"""
 from __future__ import annotations
 

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """指标聚合（图片§2 + 系统性补充）：理解/可运行/单测通过率/工具成功率 + 归因分布 + 成本时延 + 探针验证。"""
 from __future__ import annotations
 from collections import Counter

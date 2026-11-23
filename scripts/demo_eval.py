@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """一键全链路演示：python scripts/demo_eval.py"""
 import json
 import subprocess

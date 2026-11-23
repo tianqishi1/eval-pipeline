@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """任务/套件规格（SWE-bench lite 风格精简版）：指令 + 初始文件 + 隐藏单测 + oracle + 探针标签。"""
 from __future__ import annotations
 from dataclasses import dataclass, field

@@ -51,3 +51,9 @@ python -m evalpipe gate runs/heng_mutant_auto/report.json --baseline baselines/h
 python -m evalpipe watch-heng --interval 3600        # 常驻巡检循环
 powershell -NoProfile -File scripts\auto_eval.ps1    # 单轮巡检（可挂任务计划程序）
 ```
+
+## 许可与贡献
+- 许可：**Apache-2.0**（见 LICENSE）
+- 贡献：[CONTRIBUTING.md](CONTRIBUTING.md)（DCO sign-off + 门禁证据）· [行为准则](CODE_OF_CONDUCT.md) · [安全政策](SECURITY.md)
+- 设计文档：[docs/评测流水线设计.md](docs/评测流水线设计.md)（含图片方法论映射、系统性补充、M2 钩子、自动化三方式）
+- 业务 Agent 评测对象示例：[heng-erp](https://github.com/tianqishi1/heng-erp)（LGPL-3.0）

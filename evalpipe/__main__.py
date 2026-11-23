@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """CLI: python -m evalpipe <run|report|backflow|gate|rotate|calibrate|drift> ..."""
 from __future__ import annotations
 import argparse

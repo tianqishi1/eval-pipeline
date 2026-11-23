@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """报告三件套：JSON（机器）/ Markdown（人读）/ HTML 看板（趋势+归因分布+明细）。"""
 from __future__ import annotations
 import json

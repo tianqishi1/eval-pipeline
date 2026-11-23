@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Agent 适配器：oracle(基线 sanity) / mutant(故意失败，练归因) / llm(可选) / cli(Codex/Claude Code/Qoder 协议)。
 统一输出 AgentResult；任何适配器都只产出"提案"，由沙箱裁决。"""
 from __future__ import annotations

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """隔离执行沙箱：临时工作区 + git 初始化/patch 应用 + 环境探针 + pytest 子进程 + 可选 Docker。
 复现脚本自动生成（归因证据的一部分）。"""
 from __future__ import annotations

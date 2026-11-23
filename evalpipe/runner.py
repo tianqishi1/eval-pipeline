@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """运行器：隔离工作区 → 环境探针 → oracle 有效性校验 → Agent 提案 → 应用 → 单测 → 归因 → 复现脚本。"""
 from __future__ import annotations
 import datetime as dt

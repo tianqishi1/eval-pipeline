@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 from pathlib import Path
 import pytest
 from evalpipe.spec import load_suite, TaskSpec

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """HengERP 桥接适配器：把 ERP 黄金评测纳入 EvalPipe 统一归因/门禁/回流/看板。
 适配器：baseline（生产配置）/ mutant:auto_confirm（L2 越权自动执行）/ mutant:tax_flag（含税口径错误）。
 归因映射：runner/setup 错→环境；judge→模型/过程质量；budget→模型/预算；forbidden→模型/安全违规；其余断言→模型/逻辑。"""

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """归因引擎（图片§4 固定顺序）：1指令 → 2单测/预期 → 3环境 → 4Agent(规划/工具/幻觉/逻辑) → 5上下文。
 每个归因带证据与复现脚本；fail-closed：证据不足时归到最保守类别并标注待人工。"""
 from __future__ import annotations

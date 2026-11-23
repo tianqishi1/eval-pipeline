@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """M2 考虑项（已做成可运行钩子，非纸面规划）：
 - 轮换保留集（防应试进化/防过拟合评测）
 - judge 校准表 + 一致性/kappa 计算

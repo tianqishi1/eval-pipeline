@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Badcase 回流（图片§2）：区分 题坏/环境/模型，路由到数据集修订/环境修复/模型回归集；
 并提供 HengERP 进化案例池导出格式（模型类 badcase → 进化中心）。"""
 from __future__ import annotations
