@@ -1,0 +1,28 @@
+id: money-round-003
+suite: coding_mini
+kind: implement
+instruction: 实现 round_half_up(amount, places=2)：十进制四舍五入（half-up，负数远离零），返回保留 places 位的字符串。禁止浮点运算。
+tags: [decimal, medium]
+files:
+  solution.py: |
+    def round_half_up(amount, places=2):
+        raise NotImplementedError
+tests:
+  test_solution.py: |
+    from solution import round_half_up
+    def test_half(): assert round_half_up("0.125") == "0.13"
+    def test_neg(): assert round_half_up("-0.125") == "-0.13"
+    def test_places(): assert round_half_up("1.005", 2) == "1.01"
+    def test_int(): assert round_half_up("2") == "2.00"
+oracle_files:
+  solution.py: |
+    from decimal import Decimal, ROUND_HALF_UP
+    def round_half_up(amount, places=2):
+        q = Decimal(1).scaleb(-places)
+        return str(Decimal(str(amount)).quantize(q, rounding=ROUND_HALF_UP))
+mutant_files:
+  solution.py: |
+    from decimal import Decimal, ROUND_HALF_EVEN
+    def round_half_up(amount, places=2):
+        q = Decimal(1).scaleb(-places)
+        return str(Decimal(str(amount)).quantize(q, rounding=ROUND_HALF_EVEN))

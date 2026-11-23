@@ -1,0 +1,23 @@
+id: bugfix-last-n-005
+suite: coding_mini
+kind: bugfix
+instruction: 修复 solution.py 的 last_n(items, n)：应返回最后 n 个元素；n 大于长度时返回全部；当前实现有 off-by-one。
+tags: [bugfix, easy]
+files:
+  solution.py: |
+    def last_n(items, n):
+        return items[len(items) - n + 1:]
+tests:
+  test_solution.py: |
+    from solution import last_n
+    def test_two(): assert last_n([1,2,3,4,5], 2) == [4,5]
+    def test_all(): assert last_n([1,2], 5) == [1,2]
+    def test_one(): assert last_n([9], 1) == [9]
+oracle_files:
+  solution.py: |
+    def last_n(items, n):
+        return items[-n:] if n > 0 else []
+mutant_files:
+  solution.py: |
+    def last_n(items, n):
+        return items[len(items) - n + 1:]

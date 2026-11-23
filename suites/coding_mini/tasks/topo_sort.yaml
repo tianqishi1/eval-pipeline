@@ -1,0 +1,52 @@
+id: topo-sort-004
+suite: coding_mini
+kind: implement
+instruction: 实现 topo_sort(nodes, edges)：Kahn 拓扑排序；存在环抛 ValueError；同层按节点名升序。
+tags: [graph, medium]
+files:
+  solution.py: |
+    def topo_sort(nodes, edges):
+        raise NotImplementedError
+tests:
+  test_solution.py: |
+    import pytest
+    from solution import topo_sort
+    def test_chain(): assert topo_sort(["a","b","c"], [("a","b"),("b","c")]) == ["a","b","c"]
+    def test_cycle():
+        with pytest.raises(ValueError): topo_sort(["a","b"], [("a","b"),("b","a")])
+    def test_tie(): assert topo_sort(["b","a","c"], []) == ["a","b","c"]
+oracle_files:
+  solution.py: |
+    import heapq
+    def topo_sort(nodes, edges):
+        indeg = {n: 0 for n in nodes}
+        adj = {n: [] for n in nodes}
+        for u, v in edges:
+            adj[u].append(v); indeg[v] += 1
+        heap = [n for n in nodes if indeg[n] == 0]
+        heapq.heapify(heap)
+        out = []
+        while heap:
+            u = heapq.heappop(heap)
+            out.append(u)
+            for v in adj[u]:
+                indeg[v] -= 1
+                if indeg[v] == 0:
+                    heapq.heappush(heap, v)
+        if len(out) != len(nodes):
+            raise ValueError("cycle")
+        return out
+mutant_files:
+  solution.py: |
+    def topo_sort(nodes, edges):
+        indeg = {n: 0 for n in nodes}
+        adj = {n: [] for n in nodes}
+        for u, v in edges:
+            adj[u].append(v); indeg[v] += 1
+        out = [n for n in sorted(nodes) if indeg[n] == 0]
+        for u in list(out):
+            for v in adj[u]:
+                indeg[v] -= 1
+                if indeg[v] == 0:
+                    out.append(v)
+        return out

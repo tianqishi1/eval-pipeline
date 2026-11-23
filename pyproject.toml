@@ -1,0 +1,17 @@
+[project]
+name = "evalpipe"
+version = "0.1.0"
+description = "HengBench EvalPipe - coding/agent evaluation pipeline with attribution-first badcase backflow"
+requires-python = ">=3.12"
+dependencies = ["pyyaml>=6.0", "pytest>=8.2"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["evalpipe*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

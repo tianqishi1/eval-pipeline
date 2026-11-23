@@ -1,0 +1,23 @@
+name: eval-gate
+on: [push, pull_request]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e .
+      - name: Pipeline self-tests
+        run: pytest
+      - name: Oracle baseline run
+        run: python -m evalpipe run suites/coding_mini --adapter oracle --out runs/ci_oracle
+      - name: Probe attribution canary (must verify 3/3)
+        run: |
+          python -m evalpipe run suites/probes --adapter mutant:hallucination --out runs/ci_probes
+          python -c "import json;m=json.load(open('runs/ci_probes/report.json'))['metrics'];assert m['probes_verified']==m['probes_total']==3,m"
+      - name: Regression gate vs pinned baseline
+        run: python -m evalpipe gate runs/ci_oracle/report.json --baseline baselines/coding_mini_oracle.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: eval-reports, path: runs/ }

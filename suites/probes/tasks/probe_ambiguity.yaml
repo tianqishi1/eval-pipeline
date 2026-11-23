@@ -1,0 +1,28 @@
+id: probe-ambiguity-001
+suite: probes
+kind: implement
+probe: ambiguity
+expected_fail: true
+instruction: 把输入数据整理一下输出。（故意歧义：未说明排序/去重/顺序语义）
+tags: [probe]
+files:
+  solution.py: |
+    def process(nums):
+        raise NotImplementedError
+tests:
+  test_solution.py: |
+    from solution import process
+    def test_sorted_unique(): assert process([3,1,2,3]) == [1,2,3]
+    def test_empty(): assert process([]) == []
+oracle_files:
+  solution.py: |
+    def process(nums):
+        return sorted(set(nums))
+mutant_files:
+  solution.py: |
+    def process(nums):
+        seen = []
+        for x in nums:
+            if x not in seen:
+                seen.append(x)
+        return seen

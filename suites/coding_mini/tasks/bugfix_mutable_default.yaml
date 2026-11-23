@@ -1,0 +1,32 @@
+id: bugfix-mutable-006
+suite: coding_mini
+kind: bugfix
+instruction: 修复 append_item(item, bucket=None) 的可变默认参数缺陷：多次调用不应共享同一列表。
+tags: [bugfix, easy]
+files:
+  solution.py: |
+    def append_item(item, bucket=[]):
+        bucket.append(item)
+        return bucket
+tests:
+  test_solution.py: |
+    from solution import append_item
+    def test_isolated():
+        a = append_item(1)
+        b = append_item(2)
+        assert a == [1] and b == [2]
+    def test_explicit():
+        shared = []
+        assert append_item(1, shared) is shared
+oracle_files:
+  solution.py: |
+    def append_item(item, bucket=None):
+        if bucket is None:
+            bucket = []
+        bucket.append(item)
+        return bucket
+mutant_files:
+  solution.py: |
+    def append_item(item, bucket=[]):
+        bucket.append(item)
+        return bucket

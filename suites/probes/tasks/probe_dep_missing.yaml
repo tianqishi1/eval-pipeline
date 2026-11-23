@@ -1,0 +1,27 @@
+id: probe-dep-missing-002
+suite: probes
+kind: implement
+probe: dep_missing
+expected_fail: true
+instruction: 实现 scale(xs)，将每个元素乘 2，返回 numpy 数组。（环境故意不装 numpy）
+tags: [probe]
+requirements: [numpy]
+files:
+  solution.py: |
+    def scale(xs):
+        raise NotImplementedError
+tests:
+  test_solution.py: |
+    import numpy as np
+    from solution import scale
+    def test_scale(): assert np.allclose(scale([1,2]), np.array([2,4]))
+oracle_files:
+  solution.py: |
+    import numpy as np
+    def scale(xs):
+        return np.array(xs) * 2
+mutant_files:
+  solution.py: |
+    import numpy as np
+    def scale(xs):
+        return np.array(xs) * 2

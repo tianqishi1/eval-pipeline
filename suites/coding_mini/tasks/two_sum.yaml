@@ -1,0 +1,33 @@
+id: two-sum-001
+suite: coding_mini
+kind: implement
+instruction: 在 solution.py 实现 two_sum(nums, target)，返回和为 target 的两个下标（升序，唯一解）；不存在返回 []。
+tags: [array, easy]
+files:
+  solution.py: |
+    def two_sum(nums, target):
+        raise NotImplementedError
+tests:
+  test_solution.py: |
+    from solution import two_sum
+    def test_basic(): assert two_sum([2,7,11,15], 9) == [0,1]
+    def test_middle(): assert two_sum([3,2,4], 6) == [1,2]
+    def test_none(): assert two_sum([1,2], 9) == []
+oracle_files:
+  solution.py: |
+    def two_sum(nums, target):
+        seen = {}
+        for i, x in enumerate(nums):
+            if target - x in seen:
+                return [seen[target - x], i]
+            seen[x] = i
+        return []
+mutant_files:
+  solution.py: |
+    def two_sum(nums, target):
+        seen = {}
+        for i, x in enumerate(nums, start=1):
+            if target - x in seen:
+                return [seen[target - x], i]
+            seen[x] = i
+        return []

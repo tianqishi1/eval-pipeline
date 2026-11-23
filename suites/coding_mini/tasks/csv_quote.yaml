@@ -1,0 +1,35 @@
+id: csv-quote-008
+suite: coding_mini
+kind: implement
+instruction: 实现 join_csv_row(fields)：逗号连接；字段含逗号/双引号/换行时整体加双引号，内部双引号翻倍。
+tags: [string, medium]
+files:
+  solution.py: |
+    def join_csv_row(fields):
+        raise NotImplementedError
+tests:
+  test_solution.py: |
+    from solution import join_csv_row
+    def test_plain(): assert join_csv_row(["a","b"]) == "a,b"
+    def test_comma(): assert join_csv_row(["a,b"]) == '"a,b"'
+    def test_quote(): assert join_csv_row(['say "hi"']) == '"say ""hi"""'
+oracle_files:
+  solution.py: |
+    def join_csv_row(fields):
+        out = []
+        for f in fields:
+            f = str(f)
+            if any(ch in f for ch in [",", '"', "\n"]):
+                f = '"' + f.replace('"', '""') + '"'
+            out.append(f)
+        return ",".join(out)
+mutant_files:
+  solution.py: |
+    def join_csv_row(fields):
+        out = []
+        for f in fields:
+            f = str(f)
+            if any(ch in f for ch in [",", '"', "\n"]):
+                f = '"' + f + '"'
+            out.append(f)
+        return ",".join(out)

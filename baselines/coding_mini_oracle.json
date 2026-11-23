@@ -1,0 +1,383 @@
+{
+  "run_id": "f18fd5a2c0",
+  "ts": "2026-11-23T16:46:28",
+  "adapter": "oracle",
+  "docker": false,
+  "split_part": null,
+  "suites": [
+    "coding_mini"
+  ],
+  "metrics": {
+    "total": 8,
+    "passed": 8,
+    "pass_rate": 1.0,
+    "instruction_understanding_rate": 1.0,
+    "runnability_rate": 1.0,
+    "unit_test_pass_rate": 1.0,
+    "tool_success_rate": 1.0,
+    "tests_passed": 23,
+    "tests_total": 23,
+    "attribution_distribution": {
+      "通过/all_tests_pass": 8
+    },
+    "probes_total": 0,
+    "probes_verified": 0,
+    "avg_duration_s": 0.76,
+    "tokens": 0,
+    "cost": 0.0
+  },
+  "results": [
+    {
+      "task_id": "bugfix-last-n-005",
+      "suite": "coding_mini",
+      "kind": "bugfix",
+      "probe": null,
+      "instruction": "修复 solution.py 的 last_n(items, n)：应返回最后 n 个元素；n 大于长度时返回全部；当前实现有 off-by-one。",
+      "expected_fail": false,
+      "tags": [
+        "bugfix",
+        "easy"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "total": 3,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 3/3 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\bugfix-last-n-005.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..c01efb3\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..943ba40\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..ab7d89f\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"0.029\" timestamp=\"2026-11-23T16:46:06.250514+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.bugfix-last-n-005.test_solution\" name=\"test_two\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.bugfix-last-n-005.test_solution\" name=\"test_all\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.bugfix-last-n-005.test_solution\" name=\"test_one\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex 22cb429..d04accb 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,2 +1,2 @@\n def last_n(items, n):\n-    return items[len(items) - n + 1:]\n+    return items[-n:] if n > 0 else []\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.72,
+      "transcript": []
+    },
+    {
+      "task_id": "bugfix-mutable-006",
+      "suite": "coding_mini",
+      "kind": "bugfix",
+      "probe": null,
+      "instruction": "修复 append_item(item, bucket=None) 的可变默认参数缺陷：多次调用不应共享同一列表。",
+      "expected_fail": false,
+      "tags": [
+        "bugfix",
+        "easy"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 2,
+        "failed": 0,
+        "errors": 0,
+        "total": 2,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 2/2 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\bugfix-mutable-006.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..0a9ded5\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..8267539\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..6ad839c\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"0.030\" timestamp=\"2026-11-23T16:46:09.143273+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.bugfix-mutable-006.test_solution\" name=\"test_isolated\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.bugfix-mutable-006.test_solution\" name=\"test_explicit\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex 3dca3ca..ab95e2a 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,3 +1,5 @@\n-def append_item(item, bucket=[]):\n+def append_item(item, bucket=None):\n+    if bucket is None:\n+        bucket = []\n     bucket.append(item)\n     return bucket\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.78,
+      "transcript": []
+    },
+    {
+      "task_id": "csv-quote-008",
+      "suite": "coding_mini",
+      "kind": "implement",
+      "probe": null,
+      "instruction": "实现 join_csv_row(fields)：逗号连接；字段含逗号/双引号/换行时整体加双引号，内部双引号翻倍。",
+      "expected_fail": false,
+      "tags": [
+        "string",
+        "medium"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "total": 3,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 3/3 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\csv-quote-008.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..f79b9f6\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..79ad722\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..680a7bd\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"0.031\" timestamp=\"2026-11-23T16:46:12.044832+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.csv-quote-008.test_solution\" name=\"test_plain\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.csv-quote-008.test_solution\" name=\"test_comma\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.csv-quote-008.test_solution\" name=\"test_quote\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex fcb3a23..89acac3 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,2 +1,8 @@\n def join_csv_row(fields):\n-    raise NotImplementedError\n+    out = []\n+    for f in fields:\n+        f = str(f)\n+        if any(ch in f for ch in [\",\", '\"', \"\\n\"]):\n+            f = '\"' + f.replace('\"', '\"\"') + '\"'\n+        out.append(f)\n+    return \",\".join(out)\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.7,
+      "transcript": []
+    },
+    {
+      "task_id": "lru-cache-007",
+      "suite": "coding_mini",
+      "kind": "implement",
+      "probe": null,
+      "instruction": "实现 LRUCache(capacity)：get(key) 缺失返回 -1 且命中会刷新热度；put(key,value) 超容量淘汰最久未用。",
+      "expected_fail": false,
+      "tags": [
+        "design",
+        "medium"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 2,
+        "failed": 0,
+        "errors": 0,
+        "total": 2,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 2/2 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\lru-cache-007.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..b30a8ac\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..a985582\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..dd89238\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"0.034\" timestamp=\"2026-11-23T16:46:15.406365+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.lru-cache-007.test_solution\" name=\"test_evict\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.lru-cache-007.test_solution\" name=\"test_update\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex 300831d..2ee497b 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,7 +1,16 @@\n+from collections import OrderedDict\n class LRUCache:\n     def __init__(self, capacity):\n-        raise NotImplementedError\n+        self.cap = capacity\n+        self.d = OrderedDict()\n     def get(self, key):\n-        raise NotImplementedError\n+        if key not in self.d:\n+            return -1\n+        self.d.move_to_end(key)\n+        return self.d[key]\n     def put(self, key, value):\n-        raise NotImplementedError\n+        if key in self.d:\n+            self.d.move_to_end(key)\n+        self.d[key] = value\n+        if len(self.d) > self.cap:\n+            self.d.popitem(last=False)\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.75,
+      "transcript": []
+    },
+    {
+      "task_id": "money-round-003",
+      "suite": "coding_mini",
+      "kind": "implement",
+      "probe": null,
+      "instruction": "实现 round_half_up(amount, places=2)：十进制四舍五入（half-up，负数远离零），返回保留 places 位的字符串。禁止浮点运算。",
+      "expected_fail": false,
+      "tags": [
+        "decimal",
+        "medium"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "total": 4,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 4/4 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\money-round-003.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..d29bd74\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..096560d\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..b0cc739\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"4\" time=\"0.032\" timestamp=\"2026-11-23T16:46:18.362358+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.money-round-003.test_solution\" name=\"test_half\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.money-round-003.test_solution\" name=\"test_neg\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.money-round-003.test_solution\" name=\"test_places\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.money-round-003.test_solution\" name=\"test_int\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex befc25a..f56203e 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,2 +1,4 @@\n+from decimal import Decimal, ROUND_HALF_UP\n def round_half_up(amount, places=2):\n-    raise NotImplementedError\n+    q = Decimal(1).scaleb(-places)\n+    return str(Decimal(str(amount)).quantize(q, rounding=ROUND_HALF_UP))\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.73,
+      "transcript": []
+    },
+    {
+      "task_id": "parse-kv-002",
+      "suite": "coding_mini",
+      "kind": "implement",
+      "probe": null,
+      "instruction": "实现 parse_kv(text)：逐行解析 key=value；忽略空行与",
+      "expected_fail": false,
+      "tags": [
+        "string",
+        "easy"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "total": 3,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 3/3 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\parse-kv-002.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..1f7f00f\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..ea5da59\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..484a59e\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"0.033\" timestamp=\"2026-11-23T16:46:21.303395+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.parse-kv-002.test_solution\" name=\"test_basic\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.parse-kv-002.test_solution\" name=\"test_comment\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.parse-kv-002.test_solution\" name=\"test_dup\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex dbaeded..72bc286 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,2 +1,9 @@\n def parse_kv(text):\n-    raise NotImplementedError\n+    out = {}\n+    for line in text.splitlines():\n+        line = line.strip()\n+        if not line or line.startswith(\"#\") or \"=\" not in line:\n+            continue\n+        k, v = line.split(\"=\", 1)\n+        out[k.strip()] = v.strip()\n+    return out\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.79,
+      "transcript": []
+    },
+    {
+      "task_id": "topo-sort-004",
+      "suite": "coding_mini",
+      "kind": "implement",
+      "probe": null,
+      "instruction": "实现 topo_sort(nodes, edges)：Kahn 拓扑排序；存在环抛 ValueError；同层按节点名升序。",
+      "expected_fail": false,
+      "tags": [
+        "graph",
+        "medium"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "total": 3,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 3/3 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\topo-sort-004.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..74531b2\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..1e2a0ce\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..beb4fa7\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"0.035\" timestamp=\"2026-11-23T16:46:24.482726+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.topo-sort-004.test_solution\" name=\"test_chain\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.topo-sort-004.test_solution\" name=\"test_cycle\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.topo-sort-004.test_solution\" name=\"test_tie\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex 7791482..2750b8e 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,2 +1,19 @@\n+import heapq\n def topo_sort(nodes, edges):\n-    raise NotImplementedError\n+    indeg = {n: 0 for n in nodes}\n+    adj = {n: [] for n in nodes}\n+    for u, v in edges:\n+        adj[u].append(v); indeg[v] += 1\n+    heap = [n for n in nodes if indeg[n] == 0]\n+    heapq.heapify(heap)\n+    out = []\n+    while heap:\n+        u = heapq.heappop(heap)\n+        out.append(u)\n+        for v in adj[u]:\n+            indeg[v] -= 1\n+            if indeg[v] == 0:\n+                heapq.heappush(heap, v)\n+    if len(out) != len(nodes):\n+        raise ValueError(\"cycle\")\n+    return out\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.76,
+      "transcript": []
+    },
+    {
+      "task_id": "two-sum-001",
+      "suite": "coding_mini",
+      "kind": "implement",
+      "probe": null,
+      "instruction": "在 solution.py 实现 two_sum(nums, target)，返回和为 target 的两个下标（升序，唯一解）；不存在返回 []。",
+      "expected_fail": false,
+      "tags": [
+        "array",
+        "easy"
+      ],
+      "plan_ok": true,
+      "applied": true,
+      "import_ok": true,
+      "env": {
+        "ok": true,
+        "missing_deps": [],
+        "python": "3.12.2"
+      },
+      "tests": {
+        "ran": true,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "total": 3,
+        "exit_code": 0
+      },
+      "attribution": {
+        "cls": "通过",
+        "sub": "all_tests_pass",
+        "step": 0,
+        "evidence": [
+          "pytest 3/3 passed"
+        ],
+        "repro": "runs\\oracle\\repro\\two-sum-001.py",
+        "needs_human": false
+      },
+      "patch": "diff --git a/__pycache__/solution.cpython-312.pyc b/__pycache__/solution.cpython-312.pyc\nnew file mode 100644\nindex 0000000..90c9d0a\nBinary files /dev/null and b/__pycache__/solution.cpython-312.pyc differ\ndiff --git a/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc\nnew file mode 100644\nindex 0000000..0510a8f\nBinary files /dev/null and b/__pycache__/test_solution.cpython-312-pytest-9.2.0.pyc differ\ndiff --git a/_junit.xml b/_junit.xml\nnew file mode 100644\nindex 0000000..0ebaeb7\n--- /dev/null\n+++ b/_junit.xml\n@@ -0,0 +1 @@\n+<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"3\" time=\"0.038\" timestamp=\"2026-11-23T16:46:27.986618+08:00\" hostname=\"LAPTOP-419P8GL0\"><testcase classname=\"runs.oracle.work.two-sum-001.test_solution\" name=\"test_basic\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.two-sum-001.test_solution\" name=\"test_middle\" time=\"0.000\" /><testcase classname=\"runs.oracle.work.two-sum-001.test_solution\" name=\"test_none\" time=\"0.000\" /></testsuite></testsuites>\n\\ No newline at end of file\ndiff --git a/solution.py b/solution.py\nindex c02607a..c022cb6 100644\n--- a/solution.py\n+++ b/solution.py\n@@ -1,2 +1,7 @@\n def two_sum(nums, target):\n-    raise NotImplementedError\n+    seen = {}\n+    for i, x in enumerate(nums):\n+        if target - x in seen:\n+            return [seen[target - x], i]\n+        seen[x] = i\n+    return []\n",
+      "model_id": "oracle",
+      "tokens": 0,
+      "cost": 0.0,
+      "duration": 0.87,
+      "transcript": []
+    }
+  ]
+}
