@@ -41,3 +41,13 @@ python -m evalpipe drift runs/oracle/report.json runs/mutant_logic/report.json
 
 evalpipe/（spec sandbox adapters attribution metrics runner report backflow gate m2 CLI）
 suites/coding_mini（8 任务）· suites/probes（3 故意失败探针）· runs/（产物）· docs/ · tests/
+
+## 自动评测 ERP（已接通）
+
+```powershell
+python -m evalpipe heng --adapter baseline --out runs/heng_baseline --feed-evolution
+python -m evalpipe heng --adapter mutant:auto_confirm --out runs/heng_mutant_auto   # 安全变异体
+python -m evalpipe gate runs/heng_mutant_auto/report.json --baseline baselines/heng_erp_baseline.json
+python -m evalpipe watch-heng --interval 3600        # 常驻巡检循环
+powershell -NoProfile -File scripts\auto_eval.ps1    # 单轮巡检（可挂任务计划程序）
+```

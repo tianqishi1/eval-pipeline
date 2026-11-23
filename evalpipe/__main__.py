@@ -1,6 +1,7 @@
 """CLI: python -m evalpipe <run|report|backflow|gate|rotate|calibrate|drift> ..."""
 from __future__ import annotations
 import argparse
+import datetime as dt
 import json
 import sys
 from pathlib import Path
@@ -54,6 +55,13 @@ def main():
     ca = sub.add_parser("calibrate"); ca.add_argument("run_json"); ca.add_argument("--out", default="calibration.csv")
     ca.add_argument("--labels", default=None)
     dr = sub.add_parser("drift"); dr.add_argument("a"); dr.add_argument("b")
+    hg = sub.add_parser("heng"); hg.add_argument("--heng-root", default=None)
+    hg.add_argument("--adapter", default="baseline")
+    hg.add_argument("--out", default="runs/heng_baseline")
+    hg.add_argument("--feed-evolution", action="store_true")
+    wh = sub.add_parser("watch-heng"); wh.add_argument("--heng-root", default=None)
+    wh.add_argument("--interval", type=int, default=3600)
+    wh.add_argument("--baseline", default="baselines/heng_erp_baseline.json")
     args = ap.parse_args()
 
     if args.cmd == "run":
@@ -102,6 +110,45 @@ def main():
             run = json.loads(Path(args.run_json).read_text(encoding="utf-8"))
             n = m2.calibration_sheet(run, Path(args.out))
             print(f"calibration sheet: {n} rows -> {args.out}（人工填写 human_cls 后用 --labels 计算一致性）")
+    elif args.cmd == "heng":
+        from .heng_bridge import (HengBaselineAdapter, HengMutantAdapter,
+                                  run_heng_suite, feed_evolution, DEFAULT_HENG_ROOT)
+        from .backflow import write_badcases
+        hroot = args.heng_root or DEFAULT_HENG_ROOT
+        adapter = (HengBaselineAdapter(hroot) if args.adapter == "baseline"
+                   else HengMutantAdapter(args.adapter.split(":", 1)[1], hroot))
+        out = Path(args.out)
+        run = run_heng_suite(hroot, adapter, out)
+        write_all(run, out, _history(out.parent))
+        write_badcases(run, out / "badcases.jsonl")
+        m = run["metrics"]
+        print(f"heng run {run['run_id']} adapter={run['adapter']} tasks={m['total']} "
+              f"pass={m['pass_rate']:.1%} attribution={m['attribution_distribution']}")
+        if args.feed_evolution:
+            n = feed_evolution(run, hroot)
+            print(f"fed {n} badcases into HengERP evolution case pool")
+        print(f"dashboard: {out / 'dashboard.html'}")
+    elif args.cmd == "watch-heng":
+        import time
+        from .heng_bridge import HengBaselineAdapter, run_heng_suite, feed_evolution, DEFAULT_HENG_ROOT
+        from .gate import compare as gate_compare
+        from .m2 import drift
+        hroot = args.heng_root or DEFAULT_HENG_ROOT
+        base = json.loads(Path(args.baseline).read_text(encoding="utf-8"))
+        prev = None
+        while True:
+            out = Path(f"runs/auto/{dt.datetime.now():%Y%m%d_%H%M%S}")
+            run = run_heng_suite(hroot, HengBaselineAdapter(hroot), out)
+            write_all(run, out, _history(out.parent))
+            g = gate_compare(run, base)
+            fed = feed_evolution(run, hroot)
+            d = drift(prev, run) if prev else None
+            print(f"[{run['ts']}] pass={run['metrics']['pass_rate']:.1%} gate_ok={g['ok']} "
+                  f"fed={fed}" + (f" drift_flag={d['flag']}" if d else ""))
+            if not g["ok"]:
+                print("GATE VIOLATIONS:", g["violations"])
+            prev = run
+            time.sleep(args.interval)
     elif args.cmd == "drift":
         a = json.loads(Path(args.a).read_text(encoding="utf-8"))
         b = json.loads(Path(args.b).read_text(encoding="utf-8"))
