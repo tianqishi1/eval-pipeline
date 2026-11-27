@@ -11,7 +11,8 @@ import uuid
 from pathlib import Path
 import yaml
 
-DEFAULT_HENG_ROOT = os.environ.get("HENG_ROOT", r"D:\codex\heng-erp")
+DEFAULT_HENG_ROOT = os.environ.get(
+    "HENG_ROOT", str(Path(__file__).resolve().parents[2] / "heng-erp"))
 
 
 def _ensure_paths(heng_root: str):
