@@ -114,7 +114,6 @@ def main():
     elif args.cmd == "heng":
         from .heng_bridge import (HengBaselineAdapter, HengMutantAdapter,
                                   run_heng_suite, feed_evolution, DEFAULT_HENG_ROOT)
-        from .backflow import write_badcases
         hroot = args.heng_root or DEFAULT_HENG_ROOT
         adapter = (HengBaselineAdapter(hroot) if args.adapter == "baseline"
                    else HengMutantAdapter(args.adapter.split(":", 1)[1], hroot))
